@@ -6,8 +6,11 @@ import 'package:wookies_movies/bloc/movies/movies_state.dart';
 import 'package:wookies_movies/data/model/movies/movie_data.dart';
 import 'package:wookies_movies/di/injectable.dart';
 import 'package:wookies_movies/ui/widgets/movie_item_widget.dart';
+import 'package:wookies_movies/ui/widgets/movie_list.dart';
 import 'package:wookies_movies/ui/widgets/search_widget.dart';
 import 'package:wookies_movies/ui/widgets/shimmer_card_row.dart';
+
+import '../data/model/movies/movie.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});
@@ -65,22 +68,7 @@ class _MoviesPageState extends State<MoviesPage> {
                 highlightColor: Colors.grey.shade100,
               );
             } else if (state is MoviesLoaded) {
-              return SizedBox(
-                  height: 210,
-                  child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: state.movies.length,
-                itemBuilder: (context, index) {
-                  final movie = state.movies[index];
-                  return MovieItemWidget(
-                    data: MovieItemData(
-                      title: movie.title,
-                      imagePath: movie.poster,
-                      onTap: (context) {},
-                    ),
-                  );
-                },
-              ));
+              return MovieListWidget(movies: state.movies);
             } else if (state is MoviesError) {
               return Center(child: Text('Error: ${state.message}'));
             }
