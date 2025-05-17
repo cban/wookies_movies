@@ -3,14 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wookies_movies/bloc/movies/movies_bloc.dart';
 import 'package:wookies_movies/bloc/movies/movies_event.dart';
 import 'package:wookies_movies/bloc/movies/movies_state.dart';
-import 'package:wookies_movies/data/model/movies/movie_data.dart';
 import 'package:wookies_movies/di/injectable.dart';
-import 'package:wookies_movies/ui/widgets/movie_item_widget.dart';
 import 'package:wookies_movies/ui/widgets/movie_list.dart';
 import 'package:wookies_movies/ui/widgets/search_widget.dart';
 import 'package:wookies_movies/ui/widgets/shimmer_card_row.dart';
-
-import '../data/model/movies/movie.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});
@@ -61,11 +57,24 @@ class _MoviesPageState extends State<MoviesPage> {
         body: BlocBuilder<MoviesBloc, MoviesState>(
           builder: (context, state) {
             if (state is MoviesLoading) {
-              return ShimmerCardRow(
+              return SizedBox(
+                height: 200,
                 width: double.infinity,
-                height: 100,
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return ShimmerCardRow(
+                        width: 220,
+                        height: 100,
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100,
+                      );
+                    },
+                  ),
+                ),
               );
             } else if (state is MoviesLoaded) {
               return MovieListWidget(movies: state.movies);
@@ -79,4 +88,3 @@ class _MoviesPageState extends State<MoviesPage> {
     );
   }
 }
-
