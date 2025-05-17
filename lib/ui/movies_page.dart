@@ -65,7 +65,10 @@ class _MoviesPageState extends State<MoviesPage> {
                 highlightColor: Colors.grey.shade100,
               );
             } else if (state is MoviesLoaded) {
-              return ListView.builder(
+              return SizedBox(
+                  height: 210,
+                  child: ListView.builder(
+                scrollDirection: Axis.horizontal,
                 itemCount: state.movies.length,
                 itemBuilder: (context, index) {
                   final movie = state.movies[index];
@@ -77,7 +80,7 @@ class _MoviesPageState extends State<MoviesPage> {
                     ),
                   );
                 },
-              );
+              ));
             } else if (state is MoviesError) {
               return Center(child: Text('Error: ${state.message}'));
             }
