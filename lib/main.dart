@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wookies_movies/di/injectable.dart';
-=
+import 'package:wookies_movies/ui/movies_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true
       ),
-      home: const MyHomePage(title: 'Wookies Movies'),
+      home: const MoviesPage(),
     );
   }
 }
