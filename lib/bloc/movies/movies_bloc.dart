@@ -22,10 +22,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     try {
       final response = await repository.getMovies();
       emit(MoviesLoaded(response.movies));
-    } catch (e,stackTrace) {
-
-        print("Error: $e");
-        print("Stack trace: $stackTrace");
+    } catch (e, stackTrace) {
       emit(MoviesError(e.toString()));
     }
   }
