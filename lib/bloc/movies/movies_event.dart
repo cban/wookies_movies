@@ -15,3 +15,11 @@ class SearchMoviesEvent extends MoviesEvent {
   @override
   List<Object> get props => [query];
 }
+class GetMovieByIdEvent extends MoviesEvent {
+  final String id;
+
+  GetMovieByIdEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+}

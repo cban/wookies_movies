@@ -12,6 +12,8 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:wookies_movies/bloc/movies/detail/movie_detail_bloc.dart'
+    as _i322;
 import 'package:wookies_movies/bloc/movies/movies_bloc.dart' as _i842;
 import 'package:wookies_movies/data/local/shared_pref_data.dart' as _i309;
 import 'package:wookies_movies/data/remote/api_service.dart' as _i631;
@@ -37,6 +39,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i842.MoviesBloc>(
       () => _i842.MoviesBloc(repository: gh<_i1038.MoviesRepository>()),
+    );
+    gh.factory<_i322.MovieDetailBloc>(
+      () => _i322.MovieDetailBloc(repository: gh<_i1038.MoviesRepository>()),
     );
     return this;
   }

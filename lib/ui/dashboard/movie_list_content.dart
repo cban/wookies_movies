@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/model/movies/movie.dart';
 import '../../data/model/movies/movie_data.dart';
-import 'movie_item_widget.dart';
+import '../detail/movie_detail_page.dart';
+import '../widgets/movie_item_widget.dart';
 
-class MovieListWidget extends StatelessWidget {
+class MovieListContent extends StatelessWidget {
   final List<Movie> movies;
 
-  const MovieListWidget({required this.movies, super.key});
+  const MovieListContent({required this.movies, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,16 @@ class MovieListWidget extends StatelessWidget {
                       data: MovieItemData(
                         title: movie.title,
                         imagePath: movie.poster,
-                        onTap: (context) {},
+                        onTap: (context) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) =>
+                                      MovieDetailPage(movieId: movie.id),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );

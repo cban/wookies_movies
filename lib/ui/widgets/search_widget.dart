@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/movies/movies_bloc.dart';
 import '../../bloc/movies/movies_event.dart';
@@ -15,14 +15,14 @@ class SearchWidget extends StatelessWidget {
     required MoviesBloc moviesBloc,
     this.hintText,
   }) : _searchController = searchController,
-        _moviesBloc = moviesBloc;
+       _moviesBloc = moviesBloc;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: _searchController,
       decoration: InputDecoration(
-        hintText: hintText ?? 'Search',
+        hintText: hintText ?? AppLocalizations.of(context)!.search,
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
@@ -33,11 +33,10 @@ class SearchWidget extends StatelessWidget {
         suffixIcon: IconButton(
           icon: const Icon(Icons.clear),
           onPressed: () {
-            if(_searchController.text.isNotEmpty) {
+            if (_searchController.text.isNotEmpty) {
               _moviesBloc.add(GetMoviesEvent());
             }
             _searchController.clear();
-
           },
         ),
       ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:wookies_movies/bloc/movies/movies_bloc.dart';
 import 'package:wookies_movies/bloc/movies/movies_event.dart';
 import 'package:wookies_movies/bloc/movies/movies_state.dart';
 import 'package:wookies_movies/di/injectable.dart';
-import 'package:wookies_movies/ui/widgets/movie_list.dart';
+import 'package:wookies_movies/ui/dashboard/movie_list_content.dart';
 import 'package:wookies_movies/ui/widgets/search_widget.dart';
-import 'package:wookies_movies/ui/widgets/shimmer_card_row.dart';
+
+import '../widgets/shimmer_images_widget.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});
@@ -38,7 +40,7 @@ class _MoviesPageState extends State<MoviesPage> {
       value: _moviesBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Wookies Movies'),
+          title: Text(AppLocalizations.of(context)!.appTitle),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(56.0),
             child: Padding(
@@ -49,7 +51,7 @@ class _MoviesPageState extends State<MoviesPage> {
               child: SearchWidget(
                 searchController: _searchController,
                 moviesBloc: _moviesBloc,
-                hintText: 'Search movies',
+                hintText: AppLocalizations.of(context)!.searchMovies,
               ),
             ),
           ),
@@ -57,29 +59,15 @@ class _MoviesPageState extends State<MoviesPage> {
         body: BlocBuilder<MoviesBloc, MoviesState>(
           builder: (context, state) {
             if (state is MoviesLoading) {
-              return SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return ShimmerCardRow(
-                        width: 220,
-                        height: 100,
-                        baseColor: Colors.grey.shade300,
-                        highlightColor: Colors.grey.shade100,
-                      );
-                    },
-                  ),
+              return ShimmerImagesWidget();
+            } else if (state is MoviesLoaded) {
+              return MovieListContent(movies: state.movies);
+            } else if (state is MoviesError) {
+              return Center(
+                child: Text(
+                  AppLocalizations.of(context)!.errorMessage({state.message}),
                 ),
               );
-            } else if (state is MoviesLoaded) {
-              return MovieListWidget(movies: state.movies);
-            } else if (state is MoviesError) {
-              return Center(child: Text('Error: ${state.message}'));
             }
             return const SizedBox();
           },

@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "appTitle": "Wookies Movies",
+  "movies": "Movies",
+  "moviesDetails": "Movies Details",
+  "searchMovies": "Search movies",
+  "search": "Search",
+  "cast": "Cast",
+  "errorMessage": "Error {errorMessage} "
+}
