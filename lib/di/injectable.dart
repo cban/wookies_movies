@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
@@ -13,8 +14,9 @@ void configureInjection() => getIt.init();
 abstract class AppModule {
   @singleton
   Dio get dio => Dio()
+    ..options.baseUrl = dotenv.env['API_BASE_URL'] ?? 'https://wookie.codesubmit.io'
     ..options.headers = {
-      'Authorization': 'Bearer Wookie2021',
+      'Authorization': dotenv.env['API_TOKEN'] ?? '',
       'Content-Type': 'application/json',
     };
 }

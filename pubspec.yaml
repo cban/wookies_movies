@@ -49,6 +49,7 @@ dependencies:
   shared_preferences: ^2.5.3
   cached_network_image: ^3.4.1
   intl: ^0.19.0
+  flutter_dotenv: ^5.2.1
 
 
 dev_dependencies:
@@ -80,6 +81,7 @@ flutter:
   generate: true
   assets:
     - lib/l10n/
+    - .env
 
 
 
