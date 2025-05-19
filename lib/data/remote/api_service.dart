@@ -5,6 +5,7 @@ import 'package:wookies_movies/data/model/movies/movies_response.dart';
 
 part 'api_service.g.dart';
 
+@RestApi()
 @singleton
 abstract class ApiService {
   @factoryMethod

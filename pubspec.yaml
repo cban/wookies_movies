@@ -55,6 +55,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.0
+  bloc_test: 10.0.0
+  integration_test:
+    sdk: flutter
   json_serializable: ^6.9.5
   build_runner: ^2.4.15
   retrofit_generator: ^9.2.0
